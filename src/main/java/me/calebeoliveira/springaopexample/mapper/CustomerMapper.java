@@ -1,4 +1,4 @@
-package me.calebeoliveira.springaopexample;
+package me.calebeoliveira.springaopexample.mapper;
 
 import me.calebeoliveira.springaopexample.entity.Customer;
 import me.calebeoliveira.springaopexample.model.CustomerDTO;
