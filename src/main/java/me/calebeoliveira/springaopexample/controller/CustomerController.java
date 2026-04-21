@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import me.calebeoliveira.springaopexample.model.CustomerDTO;
 import me.calebeoliveira.springaopexample.service.CustomerService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +19,8 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @GetMapping("/{id}")
-    CustomerDTO getCustomerById(@PathVariable("id") @Positive(message = "ID must be positive") Long id) {
-        return customerService.getCustomer(id);
+    ResponseEntity<CustomerDTO> getCustomerById(@PathVariable("id") @Positive(message = "ID must be positive") Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.getCustomer(id));
     }
 
     @PostMapping
