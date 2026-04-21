@@ -1,3 +1,10 @@
 spring:
   application:
     name: springaopexample
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate.ddl-auto: update
+  h2:
+    console:
+      enabled: true
+      path: /h2-console

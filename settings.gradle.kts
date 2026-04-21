@@ -1,1 +1,1 @@
-rootProject.name = "springaopexample"
+rootProject.name = "spring-aop-example"
