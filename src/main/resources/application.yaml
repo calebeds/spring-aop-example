@@ -1,14 +1,54 @@
 spring:
   application:
     name: springaopexample
+  datasource:
+    url: jdbc:postgresql://localhost:5432/springaopdb
+    username: springuser
+    password: springpassword
+    driver-class-name: org.postgresql.Driver
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    hibernate.ddl-auto: update
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+    database: POSTGRESQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
 
 logging:
   pattern:
     level: "%5p [%X{correlationId}]"
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+resilience4j:
+  retry:
+    instances:
+      jsonserver:
+        maxRetryAttempts: 3
+        waitDuration: 1000
+        retryExceptions:
+          - feign.FeignException
+          - java.io.IOException
+          - java.net.SocketTimeoutException
+
+  circuitbreaker:
+    instances:
+      jsonserver:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        waitDurationInOpenState: 10000
+        failureRateThreshold: 50
+        recordExceptions:
+          - feign.FeignException
+          - java.util.concurrent.TimeoutException
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,circuitbreakers
+  endpoint:
+    health:
+      show-details: always
