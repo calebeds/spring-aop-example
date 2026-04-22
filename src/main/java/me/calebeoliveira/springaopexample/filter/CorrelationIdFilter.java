@@ -34,6 +34,8 @@ public class CorrelationIdFilter extends OncePerRequestFilter {
 
         MDC.put(CORRELATION_ID_KEY, correlationId);
 
+        response.setHeader(CORRELATION_ID_HEADER, correlationId);
+
         try {
             filterChain.doFilter(request, response);
         } finally {

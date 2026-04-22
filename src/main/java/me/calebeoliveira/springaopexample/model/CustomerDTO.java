@@ -7,6 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import me.calebeoliveira.springaopexample.client.dto.OrderDTO;
+
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -25,4 +28,6 @@ public final class CustomerDTO {
     private String phone;
     @Null(message = "age must be null for new customers")
     private Integer age;
+
+    private List<OrderDTO> orders;
 }

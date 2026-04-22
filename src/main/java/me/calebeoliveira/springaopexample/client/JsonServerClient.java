@@ -1,11 +1,18 @@
-package me.calebeoliveira.springaopexample.client.dto;
+package me.calebeoliveira.springaopexample.client;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
+import me.calebeoliveira.springaopexample.client.dto.CustomerResponse;
+import me.calebeoliveira.springaopexample.client.dto.OrderDTO;
+import me.calebeoliveira.springaopexample.client.dto.OrdersResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Collections;
+import java.util.List;
 
 @FeignClient(name = "jsonserver", url = "localhost:3000")
 @Retry(name = "jsonserver")
@@ -25,5 +32,12 @@ public interface JsonServerClient {
                 .build();
 
         return ResponseEntity.ok(fallbackCustomer);
+    }
+
+    @GetMapping("/orders")
+    ResponseEntity<List<OrderDTO>> getOrdersByCustomerId(@RequestParam("customerId") Long customerId);
+
+    default ResponseEntity<List<OrderDTO>> fallbackGetOrdersByCustomerId(Long customerId, Throwable t) {
+        return ResponseEntity.ok(Collections.emptyList());
     }
 }
