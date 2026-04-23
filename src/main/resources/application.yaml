@@ -12,6 +12,11 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          secret: wTOwsVvE1arR6RoIOuXu3MMnZIPgplrsxD5u4GpnQ20=
 
 logging:
   pattern:

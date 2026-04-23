@@ -27,33 +27,40 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-	runtimeOnly("org.postgresql:postgresql")
-	runtimeOnly("com.h2database:h2")
-
-	compileOnly("org.projectlombok:lombok:1.18.36")
-	annotationProcessor("org.projectlombok:lombok:1.18.36")
-
-	testCompileOnly("org.projectlombok:lombok:1.18.36")
-	testAnnotationProcessor("org.projectlombok:lombok:1.18.36")
-
-	implementation("org.mapstruct:mapstruct:1.6.3")
-	annotationProcessor("org.mapstruct:mapstruct-processor:1.6.3")
-
-	annotationProcessor("org.projectlombok:lombok-mapstruct-binding:0.2.0")
-
-	implementation("org.springframework.boot:spring-boot-starter-validation")
-
+	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
+	implementation("org.springframework.security:spring-security-oauth2-jose")
 	implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
 	implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("org.mapstruct:mapstruct:1.6.3")
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 
+	compileOnly("org.projectlombok:lombok:1.18.36")
+
+	runtimeOnly("org.postgresql:postgresql")
+	runtimeOnly("com.h2database:h2")
+
+	annotationProcessor("org.projectlombok:lombok:1.18.36")
+	annotationProcessor("org.mapstruct:mapstruct-processor:1.6.3")
+	annotationProcessor("org.projectlombok:lombok-mapstruct-binding:0.2.0")
+
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.boot:spring-boot-testcontainers")
 	testImplementation("org.wiremock.integrations:wiremock-spring-boot:4.0.7")
 	testImplementation("org.testcontainers:postgresql")
 	testImplementation("org.testcontainers:junit-jupiter")
 	testImplementation("io.rest-assured:rest-assured")
+
+	testCompileOnly("org.projectlombok:lombok:1.18.36")
+
+	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+	testAnnotationProcessor("org.projectlombok:lombok:1.18.36")
+
+	implementation("io.jsonwebtoken:jjwt-api:0.12.6")
+	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.6")
+	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.6")
 }
 
 tasks.withType<JavaCompile> {

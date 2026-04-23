@@ -15,10 +15,14 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 public class CustomerControllerIntegrationTest extends IntegrationTestBase {
+
+    private String authToken;
+
     @BeforeEach
     void setUp() {
         RestAssured.baseURI = baseUrl;
         RestAssured.basePath = "/api/v1/customer";
+        authToken = getAuthToken();
     }
 
     @Test
@@ -70,6 +74,7 @@ public class CustomerControllerIntegrationTest extends IntegrationTestBase {
                                 """)));
 
         given()
+                .auth().oauth2(authToken)
                 .contentType(ContentType.JSON)
                 .body("""
                         {
@@ -82,6 +87,7 @@ public class CustomerControllerIntegrationTest extends IntegrationTestBase {
                 .statusCode(HttpStatus.OK.value());
 
         given()
+                .auth().oauth2(authToken)
                 .pathParam("id", customerId)
                 .when()
                 .get("/{id}")
@@ -97,5 +103,24 @@ public class CustomerControllerIntegrationTest extends IntegrationTestBase {
                 .body("orders[0].product", equalTo("Laptop"))
                 .body("orders[0].amount", equalTo(1299.99F))
                 .body("orders[0].orderDate", equalTo("2024-01-20T10:00:00Z"));
+    }
+
+    private String getAuthToken() {
+        return given()
+                .baseUri(baseUrl)
+                .basePath("/api/auth/admin/login")
+                .contentType(ContentType.JSON)
+                .body("""
+                        {
+                            "username": "Calebe",
+                            "userId": 1234
+                        }
+                        """)
+                .when()
+                .post()
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .extract()
+                .path("token");
     }
 }
