@@ -48,6 +48,12 @@ dependencies {
 	implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
 	implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
+
+	testImplementation("org.springframework.boot:spring-boot-testcontainers")
+	testImplementation("org.wiremock.integrations:wiremock-spring-boot:4.0.7")
+	testImplementation("org.testcontainers:postgresql")
+	testImplementation("org.testcontainers:junit-jupiter")
+	testImplementation("io.rest-assured:rest-assured")
 }
 
 tasks.withType<JavaCompile> {

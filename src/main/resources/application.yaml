@@ -52,3 +52,6 @@ management:
   endpoint:
     health:
       show-details: always
+
+jsonserver:
+  base-url: localhost:3000

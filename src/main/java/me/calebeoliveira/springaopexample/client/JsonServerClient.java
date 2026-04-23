@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Collections;
 import java.util.List;
 
-@FeignClient(name = "jsonserver", url = "localhost:3000")
+@FeignClient(name = "jsonserver", url = "${jsonserver.base-url}")
 @Retry(name = "jsonserver")
 @CircuitBreaker(name = "jsonserver")
 public interface JsonServerClient {
