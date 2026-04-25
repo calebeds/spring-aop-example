@@ -42,7 +42,11 @@ public class SecurityConfig {
                                 "/api/health/**",
                                 "/h2-console/**",
                                 "/swagger-ui/**",
-                                "/v3/api-docs/**"
+                                "/v3/api-docs/**",
+                                "/graphiql/**",
+                                "/graphql/**",
+                                "/altair/**",
+                                "/error"
                         ).permitAll()
                         .requestMatchers("/api/v1/customer/**").authenticated()
                         .anyRequest().authenticated()

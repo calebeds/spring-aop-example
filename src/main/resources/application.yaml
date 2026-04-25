@@ -17,6 +17,10 @@ spring:
       resourceserver:
         jwt:
           secret: wTOwsVvE1arR6RoIOuXu3MMnZIPgplrsxD5u4GpnQ20=
+  graphql:
+    graphiql:
+      enabled: true
+      path: /graphiql
 
 logging:
   pattern:
@@ -24,6 +28,8 @@ logging:
   level:
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.springframework.security: TRACE
+    org.springframework.security.web: TRACE
 
 resilience4j:
   retry:
