@@ -35,6 +35,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.mapstruct:mapstruct:1.6.3")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
+	implementation("com.github.ben-manes.caffeine:caffeine:3.1.8")
 
 	compileOnly("org.projectlombok:lombok:1.18.36")
 

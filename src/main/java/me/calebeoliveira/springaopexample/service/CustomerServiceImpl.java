@@ -6,7 +6,7 @@ import me.calebeoliveira.springaopexample.client.dto.CustomerResponse;
 import me.calebeoliveira.springaopexample.client.dto.OrderDTO;
 import me.calebeoliveira.springaopexample.mapper.CustomerMapper;
 import me.calebeoliveira.springaopexample.entity.Customer;
-import me.calebeoliveira.springaopexample.model.CustomerDTO;
+import me.calebeoliveira.springaopexample.model.*;
 import me.calebeoliveira.springaopexample.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +30,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @CacheResult
+    @Retryable
+    @CircuitBreaker
+    @RateLimit
+    @Monitor
+    @Auditable
     public CustomerDTO getCustomer(final long id) {
         Optional<Customer> customerOptional = customerRepository.findById(id);
 
